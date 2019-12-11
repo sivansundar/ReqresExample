@@ -28,14 +28,17 @@ public class ReqresRepository {
 
     public MutableLiveData<ReqResResponse> getList(int page, int delay) {
         MutableLiveData<ReqResResponse> responseData = new MutableLiveData<>();
+        MutableLiveData<Boolean> shimmerStatus = new MutableLiveData<>();
         retrofitInterface.getDataList(page, delay).enqueue(new Callback<ReqResResponse>() {
             @Override
             public void onResponse(Call<ReqResResponse> call, Response<ReqResResponse> response) {
                 if (response.isSuccessful()) {
                     responseData.setValue(response.body());
                     Log.d("TAG", "onResponse: RESPONSE CODE : " + response.body());
+                    shimmerStatus.setValue(false);
                 }
                 else {
+                    shimmerStatus.setValue(true);
                     Log.d("TAG", "onResponse: RESPONSE : " + response.message());
                 }
             }

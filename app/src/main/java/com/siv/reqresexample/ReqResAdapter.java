@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
@@ -37,8 +38,12 @@ public class ReqResAdapter extends RecyclerView.Adapter<ReqResAdapter.ReqResView
     public void onBindViewHolder(@NonNull ReqResAdapter.ReqResViewHolder holder, int position) {
 
         holder.firstName.setText(data.get(position).getFirst_name());
+        holder.lastName.setText(data.get(position).getLast_name());
         Log.d("TAG", "onBindViewHolder: FirstName : " + data.get(position).getFirst_name() +
                 "\n" + data.get(position).getLast_name());
+
+        String avatar_url = data.get(position).getAvatar();
+        holder.loadAvatar(avatar_url);
 
     }
 
@@ -58,7 +63,13 @@ public class ReqResAdapter extends RecyclerView.Adapter<ReqResAdapter.ReqResView
             firstName = itemView.findViewById(R.id.firstName_text);
             lastName = itemView.findViewById(R.id.lastName_text);
             email = itemView.findViewById(R.id.email_text);
+            avatar_image = itemView.findViewById(R.id.avatar_image);
 
+
+        }
+
+        public void loadAvatar(String url) {
+            Glide.with(context).load(url).into(avatar_image);
 
         }
     }

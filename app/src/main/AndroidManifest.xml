@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.siv.reqresexample.BroadcastReceivers.InternetBroadcast"
+        <receiver
+            android:name="com.siv.reqresexample.InternetBroadcast"
                   android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
