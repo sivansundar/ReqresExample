@@ -1,13 +1,14 @@
 package com.siv.reqresexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,14 @@ public class MainActivity extends AppCompatActivity implements InternetBroadcast
 
     RecyclerView recyclerView;
     ReqresViewModel reqresViewModel;
+    ReqResAdapter reqResAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        recyclerView = findViewById(R.id.recyclerView);
         checkConnection();
 
         reqresViewModel = ViewModelProviders.of(this).get(ReqresViewModel.class);
@@ -37,10 +39,26 @@ public class MainActivity extends AppCompatActivity implements InternetBroadcast
             List<ReqresModel> listData = reqresResponse.getData();
             Log.d(TAG, "onCreate: responsedata : " + listData.get(3).getFirst_name());
             arrayListData.addAll(listData);
-            Log.d(TAG, "onCreate: VALUES : " + arrayListData.get(1));
+            reqResAdapter.notifyDataSetChanged();
+            Log.d(TAG, "onCreate: VALUES : " + arrayListData);
         });
 
         //RecyclerAdapter needs to be srt up. Then move to pagination and Shimmers.
+
+        setupRecyclerView();
+    }
+
+    private void setupRecyclerView() {
+
+        if (reqResAdapter == null) {
+            reqResAdapter = new ReqResAdapter(MainActivity.this, arrayListData);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(reqResAdapter);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        } else {
+            reqResAdapter.notifyDataSetChanged();
+        }
 
     }
 
