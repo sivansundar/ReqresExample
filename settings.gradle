@@ -1,0 +1,2 @@
+rootProject.name='ReqresExample'
+include ':app'
