@@ -2,8 +2,6 @@ package com.siv.reqresexample;
 
 import android.app.Application;
 
-import BroadcastReceivers.InternetBroadcast;
-
 public class MyApplication extends Application {
 
 
