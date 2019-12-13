@@ -36,11 +36,18 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+
 
     //Architecture Components
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
+    implementation "android.arch.paging:runtime:1.1.0"
+
+    //WorkManager
+    implementation "androidx.work:work-runtime:2.2.0"
+
 
     //CircularImageView
     implementation 'com.mikhaellopez:circularimageview:3.2.0'

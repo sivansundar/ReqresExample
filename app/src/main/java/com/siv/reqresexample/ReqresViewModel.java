@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class ReqresViewModel extends ViewModel {
 
-    private MutableLiveData<ReqResResponse> mutableLiveData;
+    private MutableLiveData<PageResponse> mutableLiveData;
     private ReqresRepository reqresRepository;
 
     public void init() {
@@ -15,11 +15,11 @@ public class ReqresViewModel extends ViewModel {
         }
 
         reqresRepository = ReqresRepository.getInstance();
-        mutableLiveData = reqresRepository.getList(1, 3);
+        mutableLiveData = reqresRepository.getList(1);
     }
 
 
-    public LiveData<ReqResResponse> getReqResData() {
+    public LiveData<PageResponse> getReqResData() {
         return mutableLiveData;
     }
 }

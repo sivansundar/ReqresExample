@@ -65,3 +65,8 @@ public class ReqresModel {
         this.avatar = avatar;
     }
 }
+
+
+
+
+
